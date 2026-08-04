@@ -35,7 +35,7 @@ class AuthenticateDashboardUser extends Authenticate
         // implement `FilamentUser` with `canAccessPanel()`.
 
         $userCanAccessPanel = $user instanceof FilamentUser ? $user->canAccessPanel($panel) : (config('app.env') !== 'local');
-        $userIsEnabled = $user->enabled ?? false;
+        $userIsEnabled = $user->is_active ?? false;
 
         abort_if(! $userCanAccessPanel || ! $userIsEnabled, 403);
     }

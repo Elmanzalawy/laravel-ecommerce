@@ -19,7 +19,7 @@ class UserInfolist
                 TextEntry::make('email_verified_at')
                     ->dateTime()
                     ->placeholder('-'),
-                IconEntry::make('enabled')
+                IconEntry::make('is_active')
                     ->boolean(),
                 TextEntry::make('created_at')
                     ->dateTime()

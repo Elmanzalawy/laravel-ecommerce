@@ -6,10 +6,8 @@ namespace App\Models;
 
 use App\Contracts\TranslatableContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Observers\ProductCategoryObserver;
 use App\Models\Translations\ProductCategoryTranslation;
 use App\Models\Translations\Translatable;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -37,7 +35,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-#[ObservedBy(ProductCategoryObserver::class)]
 class ProductCategory extends Translatable implements TranslatableContract
 {
     /** @use HasFactory<\Database\Factories\ProductCategoryFactory> */

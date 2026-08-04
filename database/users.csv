@@ -1,0 +1,2 @@
+﻿id,name,email,email_verified_at,password,remember_token,enabled,created_at,updated_at,deleted_at
+1,Admin,admin@bytesoftware.com,2026-08-04 15:01:21,$2y$12$uti8Zc1lWxu1h3rpL9bHYO0rA0tvvi2EnsFXGfuhOw8Zq92kwaOR.,xWWXT2KDNo,1,2026-08-04 15:01:21,2026-08-04 15:16:00,

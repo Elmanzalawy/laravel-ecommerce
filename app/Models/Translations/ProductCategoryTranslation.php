@@ -13,7 +13,7 @@ use Illuminate\Support\Carbon;
  * @property string|null $name
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read ProductCategory $productCategory
+ * @property-read ProductCategory|null $productCategory
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategoryTranslation newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategoryTranslation newQuery()

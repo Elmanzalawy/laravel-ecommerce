@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Users\Schemas;
 
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
@@ -23,6 +24,10 @@ class UserForm
                 TextInput::make('password')
                     ->password()
                     ->required(fn (?string $context): bool => $context === 'create'),
+                Select::make('roles')
+                    ->multiple()
+                    ->relationship('roles', 'name')
+                    ->preload(),
                 Toggle::make('enabled')->default(true),
             ]);
     }

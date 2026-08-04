@@ -18,6 +18,7 @@ class ProductCategoryFactory extends Factory
     public function definition(): array
     {
         $nameEn = fake()->unique()->word();
+
         return [
             'translations' => [
                 [

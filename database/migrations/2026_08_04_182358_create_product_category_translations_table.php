@@ -32,4 +32,3 @@ return new class extends Migration
         Schema::dropIfExists('product_category_translations');
     }
 };
-            // if (env('DB_CONNECTION') === 'mysql') {

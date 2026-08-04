@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Translatable newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Translatable newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Translatable query()
+ *
  * @mixin \Eloquent
  */
 abstract class Translatable extends Model

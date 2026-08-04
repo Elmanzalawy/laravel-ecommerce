@@ -28,7 +28,7 @@ class UserForm
                     ->multiple()
                     ->relationship('roles', 'name')
                     ->preload(),
-                Toggle::make('enabled')->default(true),
+                Toggle::make('is_active')->default(true),
             ]);
     }
 }

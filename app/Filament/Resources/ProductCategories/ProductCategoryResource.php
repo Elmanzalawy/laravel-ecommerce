@@ -26,6 +26,21 @@ class ProductCategoryResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __(NAVGROUP_SHOP);
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Product Categories');
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return 1;
+    }
+
     public static function form(Schema $schema): Schema
     {
         return ProductCategoryForm::configure($schema);

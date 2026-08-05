@@ -14,7 +14,6 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read ProductCategory|null $productCategory
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategoryTranslation newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategoryTranslation newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategoryTranslation query()
@@ -24,7 +23,6 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategoryTranslation whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategoryTranslation whereProductCategoryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategoryTranslation whereUpdatedAt($value)
- *
  * @mixin \Eloquent
  */
 class ProductCategoryTranslation extends Model

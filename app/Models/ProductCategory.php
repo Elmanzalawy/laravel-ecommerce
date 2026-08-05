@@ -29,7 +29,6 @@ use Illuminate\Support\Carbon;
  * @property-read ProductCategory|null $parent
  * @property-read Collection<int, ProductCategoryTranslation> $translations
  * @property-read int|null $translations_count
- *
  * @method static \Database\Factories\ProductCategoryFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory newQuery()
@@ -44,7 +43,6 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class ProductCategory extends Translatable implements TranslatableContract

@@ -20,6 +20,7 @@
         "barryvdh/laravel-debugbar": "^4.4",
         "barryvdh/laravel-ide-helper": "^3.7",
         "fakerphp/faker": "^1.23",
+        "larastan/larastan": "*",
         "laravel/pail": "^1.2.5",
         "laravel/pao": "^1.0.6",
         "laravel/pint": "^1.27",
@@ -84,7 +85,8 @@
             "@php artisan ide-helper:models -RW",
             "@php artisan ide-helper:generate",
             "@php artisan erd:generate",
-            "./vendor/bin/pint"
+            "./vendor/bin/pint",
+            "./vendor/bin/phpstan analyse --memory-limit=2G"
         ],
         "mfs": [
             "@php artisan migrate:fresh --seed",

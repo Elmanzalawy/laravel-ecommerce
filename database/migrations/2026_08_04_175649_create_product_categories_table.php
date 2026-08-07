@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('product_categories', function (Blueprint $table) {
             $table->id();
+            $table->json('name');
             $table->foreignId('parent_id')->nullable()->constrained('product_categories')->cascadeOnDelete();
             $table->string('slug')->unique();
             $table->boolean('is_active')->default(true);

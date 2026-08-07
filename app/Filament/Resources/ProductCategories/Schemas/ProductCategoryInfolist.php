@@ -12,7 +12,7 @@ class ProductCategoryInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('parent.id')
+                TextEntry::make('parent.name')
                     ->label('Parent')
                     ->placeholder('-'),
                 TextEntry::make('slug'),

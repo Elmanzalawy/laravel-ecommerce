@@ -20,15 +20,9 @@ class ProductCategoryFactory extends Factory
         $nameEn = fake()->unique()->word();
 
         return [
-            'translations' => [
-                [
-                    'locale' => 'en',
-                    'name' => $nameEn,
-                ],
-                [
-                    'locale' => 'ar',
-                    'name' => fake()->word(),
-                ],
+            'name' => [
+                'en' => $nameEn,
+                'ar' => fake()->unique()->word(),
             ],
             'parent_id' => fake()->boolean(10) ? null : ProductCategory::factory(),
             'is_active' => fake()->boolean(80),

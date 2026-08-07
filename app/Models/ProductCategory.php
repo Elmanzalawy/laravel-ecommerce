@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Contracts\TranslatableContract;
-use App\Models\Translations\ProductCategoryTranslation;
-use App\Models\Translations\Translatable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Database\Factories\ProductCategoryFactory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use Spatie\Translatable\Attributes\Translatable;
+use Spatie\Translatable\HasTranslations;
 
 /**
  * @property int $id
+ * @property array<array-key, mixed> $name
  * @property int|null $parent_id
  * @property string $slug
  * @property int $is_active
@@ -25,10 +27,9 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $deleted_at
  * @property-read Collection<int, ProductCategory> $children
  * @property-read int|null $children_count
- * @property-read string|null $name
+ * @property-read array $translatable_columns_from
  * @property-read ProductCategory|null $parent
- * @property-read Collection<int, ProductCategoryTranslation> $translations
- * @property-read int|null $translations_count
+ * @property-read mixed $translations
  * @method static \Database\Factories\ProductCategoryFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory newQuery()
@@ -38,6 +39,11 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory whereJsonContainsLocale(string $column, string $locale, ?mixed $value, string $operand = '=')
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory whereJsonContainsLocales(string $column, array $locales, ?mixed $value, string $operand = '=')
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory whereLocale(string $column, string $locale)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory whereLocales(string $column, array $locales)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory whereParentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory whereUpdatedAt($value)
@@ -45,22 +51,13 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory withoutTrashed()
  * @mixin \Eloquent
  */
-class ProductCategory extends Translatable implements TranslatableContract
+#[Translatable('name')]
+class ProductCategory extends Model
 {
     /** @use HasFactory<ProductCategoryFactory> */
-    use HasFactory, SoftDeletes;
+    use HasFactory, HasTranslations, SoftDeletes;
 
     protected $guarded = [];
-
-    public function getNameAttribute(): ?string
-    {
-        return $this->translations()->where('locale', app()->getLocale())->value('name');
-    }
-
-    public function translations(): HasMany
-    {
-        return $this->hasMany(ProductCategoryTranslation::class);
-    }
 
     public function parent(): BelongsTo
     {

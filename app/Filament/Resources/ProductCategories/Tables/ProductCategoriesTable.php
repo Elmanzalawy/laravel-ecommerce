@@ -19,7 +19,7 @@ class ProductCategoriesTable
     {
         return $table
             ->columns([
-                TextColumn::make('parent.id')
+                TextColumn::make('parent.name')
                     ->searchable(),
                 TextColumn::make('slug')
                     ->searchable(),

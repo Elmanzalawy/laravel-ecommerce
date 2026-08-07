@@ -45,7 +45,7 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 FilamentShieldPlugin::make()
                     ->navigationLabel(__('Roles & Permissions'))
-                    ->navigationGroup(__(NAVGROUP_USER_DIRECTORY))
+                    ->navigationGroup(__(NAVGROUP_USER_DIRECTORY)),
             ])
             ->middleware([
                 EncryptCookies::class,

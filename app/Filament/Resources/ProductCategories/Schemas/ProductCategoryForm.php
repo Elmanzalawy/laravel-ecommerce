@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\ProductCategories\Schemas;
 
 use App\Models\ProductCategory;
+use App\Settings\StoreSettings;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -26,7 +27,7 @@ class ProductCategoryForm
                 TextInput::make('slug')
                     ->disabled()
                     ->dehydrated()
-                    ->default(fn(Get $get) => Str::slug($get('name.en')))
+                    ->default(fn (Get $get) => Str::slug($get('name.en')))
                     ->unique(ignoreRecord: true)
                     ->required(),
                 Toggle::make('is_active')
@@ -36,7 +37,7 @@ class ProductCategoryForm
 
     public static function getTranslationsSection(): Component
     {
-        $storeLanguages = app(\App\Settings\StoreSettings::class)->store_languages;
+        $storeLanguages = app(StoreSettings::class)->store_languages;
         $translationsSection = Section::make(__('Translations'))
             ->collapsible()
             ->collapsed(false)
@@ -45,13 +46,14 @@ class ProductCategoryForm
 
         foreach ($storeLanguages as $language) {
             $translationsSchema[] = TextInput::make("name.{$language}")
-                ->default(fn(?ProductCategory $record) => $record?->name[$language] ?? null)
-                ->label(__('Name') . " ({$language})")
+                ->default(fn (?ProductCategory $record) => $record?->name[$language] ?? null)
+                ->label(__('Name')." ({$language})")
                 ->required()
-                ->when($language === 'en', fn(TextInput $input) => $input
+                ->when($language === 'en', fn (TextInput $input) => $input
                     ->live(onBlur: true)
-                    ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))));
+                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))));
         }
+
         return $translationsSection->schema($translationsSchema);
     }
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Database\Factories\ProductCategoryFactory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -30,6 +29,7 @@ use Spatie\Translatable\HasTranslations;
  * @property-read array $translatable_columns_from
  * @property-read ProductCategory|null $parent
  * @property-read mixed $translations
+ *
  * @method static \Database\Factories\ProductCategoryFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory newQuery()
@@ -49,6 +49,7 @@ use Spatie\Translatable\HasTranslations;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductCategory withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 #[Translatable('name')]

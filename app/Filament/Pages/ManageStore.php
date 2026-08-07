@@ -5,8 +5,6 @@ namespace App\Filament\Pages;
 use App\Settings\StoreSettings;
 use BackedEnum;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\TextInput;
 use Filament\Pages\SettingsPage;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;

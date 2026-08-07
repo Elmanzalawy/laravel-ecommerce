@@ -18,9 +18,6 @@ class AuthenticateDashboardUser extends Authenticate
 
         if (! $guard->check()) {
             $this->unauthenticated($request, $guards);
-
-            return;
-            /** @phpstan-ignore-line */
         }
 
         $this->auth->shouldUse(Filament::getAuthGuard());

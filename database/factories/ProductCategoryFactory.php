@@ -17,12 +17,12 @@ class ProductCategoryFactory extends Factory
      */
     public function definition(): array
     {
-        $nameEn = fake()->unique()->word();
+        $nameEn = fake()->word().fake()->word().rand(1, 1000);
 
         return [
             'name' => [
                 'en' => $nameEn,
-                'ar' => fake()->unique()->word(),
+                'ar' => fake()->word(),
             ],
             'parent_id' => fake()->boolean(10) ? null : ProductCategory::factory(),
             'is_active' => fake()->boolean(80),

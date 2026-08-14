@@ -24,11 +24,10 @@ use Spatie\Translatable\HasTranslations;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
- * @property-read Collection<int, ProductCategory> $categories
+ * @property-read Collection<int, \App\Models\ProductCategory> $categories
  * @property-read int|null $categories_count
  * @property-read array $translatable_columns_from
  * @property-read mixed $translations
- *
  * @method static \Database\Factories\ProductFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product newQuery()
@@ -52,7 +51,6 @@ use Spatie\Translatable\HasTranslations;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product withoutTrashed()
- *
  * @mixin \Eloquent
  */
 #[Translatable('name', 'description')]
@@ -60,6 +58,8 @@ class Product extends Model
 {
     /** @use HasFactory<ProductFactory> */
     use HasFactory, HasTranslations, SoftDeletes;
+
+    protected $guarded = [];
 
     /**
      * Get the attributes that should be cast.

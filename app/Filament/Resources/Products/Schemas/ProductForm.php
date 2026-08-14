@@ -2,16 +2,16 @@
 
 namespace App\Filament\Resources\Products\Schemas;
 
-use App\Settings\StoreSettings;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\Toggle;
-use Filament\Schemas\Components\Component;
-use Filament\Schemas\Components\Utilities\Get;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Settings\StoreSettings;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Component;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
@@ -37,10 +37,10 @@ class ProductForm
                             ->disabled()
                             ->dehydrated()
                             ->reactive()
-                            ->default(fn(Get $get) => Str::slug($get('name.en')))
+                            ->default(fn (Get $get) => Str::slug($get('name.en')))
                             ->unique(ignoreRecord: true)
                             ->required(),
-                        Toggle::make('is_active')
+                        Toggle::make('is_active'),
                     ]),
                 Section::make(__('Pricing & Inventory'))
                     ->collapsible()
@@ -62,7 +62,6 @@ class ProductForm
             ]);
     }
 
-
     public static function getTranslationsSection(): Component
     {
         $storeLanguages = app(StoreSettings::class)->store_languages;
@@ -74,19 +73,18 @@ class ProductForm
 
         foreach ($storeLanguages as $language) {
             $translationsSchema[] = TextInput::make("name.{$language}")
-                ->default(fn(?Product $record) => $record?->name[$language] ?? null)
+                ->default(fn (?Product $record) => $record?->name[$language] ?? null)
                 ->label(__("product.name.$language"))
                 ->required()
-                ->when($language === 'en', fn(TextInput $input) => $input
+                ->when($language === 'en', fn (TextInput $input) => $input
                     ->live(onBlur: true)
-                    ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))));
+                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))));
         }
-
 
         foreach ($storeLanguages as $language) {
             $translationsSchema[] = Textarea::make("description.{$language}")
-                ->default(fn(?Product $record) => $record?->description[$language] ?? null)
-                ->label(__('Description') . " ({$language})");
+                ->default(fn (?Product $record) => $record?->description[$language] ?? null)
+                ->label(__('Description')." ({$language})");
         }
 
         return $translationsSection->schema($translationsSchema);

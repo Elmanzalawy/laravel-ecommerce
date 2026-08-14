@@ -8,5 +8,6 @@ Route::get('/', function () {
     auth()->id();
 
     return Carbon::now()->month(1)->daysInMonth();
+
     return view('welcome');
 });

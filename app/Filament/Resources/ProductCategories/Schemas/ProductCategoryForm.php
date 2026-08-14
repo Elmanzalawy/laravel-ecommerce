@@ -32,10 +32,10 @@ class ProductCategoryForm
                         TextInput::make('slug')
                             ->disabled()
                             ->dehydrated()
-                            ->default(fn(Get $get) => Str::slug($get('name.en')))
+                            ->default(fn (Get $get) => Str::slug($get('name.en')))
                             ->unique(ignoreRecord: true)
                             ->required(),
-                        Toggle::make('is_active')
+                        Toggle::make('is_active'),
                     ]),
             ]);
     }
@@ -51,12 +51,12 @@ class ProductCategoryForm
 
         foreach ($storeLanguages as $language) {
             $translationsSchema[] = TextInput::make("name.{$language}")
-                ->default(fn(?ProductCategory $record) => $record?->name[$language] ?? null)
-                ->label(__('Name') . " ({$language})")
+                ->default(fn (?ProductCategory $record) => $record?->name[$language] ?? null)
+                ->label(__('Name')." ({$language})")
                 ->required()
-                ->when($language === 'en', fn(TextInput $input) => $input
+                ->when($language === 'en', fn (TextInput $input) => $input
                     ->live(onBlur: true)
-                    ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))));
+                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))));
         }
 
         return $translationsSection->schema($translationsSchema);

@@ -3,16 +3,13 @@
 namespace App\Filament\Resources\Products\Schemas;
 
 use App\Models\Product;
+use App\Settings\StoreSettings;
 use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\TextEntry;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Toggle;
-use Filament\Schemas\Components\Flex;
-use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Component;
-use App\Settings\StoreSettings;
-use Filament\Forms\Components\Textarea;
+use Filament\Schemas\Components\Flex;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
 
 class ProductInfolist
 {
@@ -29,25 +26,24 @@ class ProductInfolist
                     ->schema([
                         TextEntry::make('categories.name')
                             ->badge()
-                            ->url(fn($entry) => "#$entry")
+                            ->url(fn ($entry) => "#$entry")
                             ->label(__('Categories')),
                         TextEntry::make('slug'),
                         IconEntry::make('is_active')
                             ->boolean(),
 
                         Flex::make([
-                                TextEntry::make('created_at')
-                                    ->dateTime()
-                                    ->placeholder('-'),
-                                TextEntry::make('updated_at')
-                                    ->dateTime()
-                                    ->placeholder('-'),
-                                TextEntry::make('deleted_at')
-                                    ->dateTime()
-                                    ->visible(fn(Product $record): bool => $record->trashed()),
-                            ]),
+                            TextEntry::make('created_at')
+                                ->dateTime()
+                                ->placeholder('-'),
+                            TextEntry::make('updated_at')
+                                ->dateTime()
+                                ->placeholder('-'),
+                            TextEntry::make('deleted_at')
+                                ->dateTime()
+                                ->visible(fn (Product $record): bool => $record->trashed()),
+                        ]),
                     ]),
-
 
                 Section::make(__('Pricing & Inventory'))
                     ->collapsible()
@@ -66,7 +62,6 @@ class ProductInfolist
             ]);
     }
 
-
     public static function getTranslationsSection(): Component
     {
         $storeLanguages = app(StoreSettings::class)->store_languages;
@@ -77,15 +72,14 @@ class ProductInfolist
             ->schema($translationsSchema = []);
 
         foreach ($storeLanguages as $language) {
-            $translationsSchema[] = TextEntry::make("name")
-                ->getStateUsing(fn(?Product $record) => $record->getTranslation('name', $language))
+            $translationsSchema[] = TextEntry::make('name')
+                ->getStateUsing(fn (?Product $record) => $record->getTranslation('name', $language))
                 ->label(__("product.name.$language"));
         }
 
-
         foreach ($storeLanguages as $language) {
             $translationsSchema[] = TextEntry::make("description.{$language}")
-                ->getStateUsing(fn(?Product $record) => $record->getTranslation('description', $language))
+                ->getStateUsing(fn (?Product $record) => $record->getTranslation('description', $language))
                 ->disabled()
                 ->label(__("product.description.$language"));
         }

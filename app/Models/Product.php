@@ -76,6 +76,9 @@ class Product extends Model
             'cost_per_item' => 'integer',
             'quantity' => 'integer',
             'is_active' => 'boolean',
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
+            'deleted_at' => 'datetime',
         ];
     }
 

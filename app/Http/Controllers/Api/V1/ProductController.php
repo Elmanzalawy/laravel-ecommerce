@@ -6,48 +6,35 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\ProductResource;
-use App\Models\Product;
-use Illuminate\Http\Request;
+use App\Services\ProductService;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\JsonApi\AnonymousResourceCollection;
 
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * List products
+     * @param ProductService $productService
+     * @return AnonymousResourceCollection
      */
-    public function index()
+    public function index(ProductService $productService): AnonymousResourceCollection
     {
-        return ProductResource::collection(Product::paginate(1));
+        return ProductResource::collection($productService->listProducts());
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Get product by ID
+     * @param ProductService $productService
+     * @param string $id
+     * @return ProductResource
      */
-    public function store(Request $request)
+    public function show(ProductService $productService, string $id): ProductResource|JsonResponse
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        try {
+            return ProductResource::make($productService->getProductById($id));
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['error' => __('Product not found')], 404);
+        }
     }
 }

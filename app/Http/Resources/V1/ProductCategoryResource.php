@@ -2,12 +2,25 @@
 
 namespace App\Http\Resources\V1;
 
-use App\Models\ProductCategory;
-use Illuminate\Http\Resources\JsonApi\JsonApiResource;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\JsonApi\JsonApiResource;
 
 class ProductCategoryResource extends JsonApiResource
 {
+    public const ALLOWED_FIELDS = [
+        'name',
+        'slug',
+        'parent_id',
+        'is_active',
+        'created_at',
+        'updated_at',
+    ];
+
+    public const ALLOWED_INCLUDES = [
+        'parent',
+        'children',
+    ];
+
     /**
      * Get the resource's attributes.
      *
@@ -15,9 +28,6 @@ class ProductCategoryResource extends JsonApiResource
      */
     public function toAttributes(Request $request): array
     {
-        /**
-         * @var ProductCategory $this
-         */
         return [
             'name' => $this->name,
             'slug' => $this->slug,

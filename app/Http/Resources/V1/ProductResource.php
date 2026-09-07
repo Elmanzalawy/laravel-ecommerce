@@ -8,10 +8,32 @@ use Illuminate\Http\Resources\JsonApi\JsonApiResource;
 
 class ProductResource extends JsonApiResource
 {
-    /**
-     * The maximum relationship depth.
-     */
-    public static int $maxRelationshipDepth = 3;
+    public const ALLOWED_FIELDS = [
+        'name',
+        'slug',
+        'description',
+        'price',
+        'compare_at_price',
+        'cost_per_item',
+        'quantity',
+        'is_active',
+        'created_at',
+        'updated_at',
+    ];
+
+    public const ALLOWED_INCLUDES = [
+        'categories',
+    ];
+
+    public const ALLOWED_FILTERS = [
+        'price',
+        'compare_at_price',
+        'cost_per_item',
+        'quantity',
+        'is_active',
+        'created_at',
+    ];
+
     /**
      * Get the resource's attributes.
      *

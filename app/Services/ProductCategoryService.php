@@ -1,11 +1,13 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Models\ProductCategory;
 use App\Http\Resources\V1\ProductCategoryResource;
+use App\Models\ProductCategory;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -13,7 +15,8 @@ class ProductCategoryService
 {
     /**
      * List product categories
-     * @return LengthAwarePaginator<int, ProductCategory>
+     *
+     * @return LengthAwarePaginator<int, Model>
      */
     public function listCategories(): LengthAwarePaginator
     {
@@ -23,11 +26,10 @@ class ProductCategoryService
 
     /**
      * Get product category by ID
-     * @param string $id
+     *
      * @throws ModelNotFoundException
-     * @return ProductCategory
      */
-    public function getCategoryById(string $id): ProductCategory
+    public function getCategoryById(string $id): Model
     {
         return $this->categoryQuery()
             ->findOrFail($id);
@@ -35,7 +37,7 @@ class ProductCategoryService
 
     private function categoryQuery(): QueryBuilder
     {
-        return QueryBuilder::for(ProductCategory::query())
+        return QueryBuilder::for(ProductCategory::class)
             ->allowedFields(...ProductCategoryResource::ALLOWED_FIELDS)
             ->allowedIncludes(...ProductCategoryResource::ALLOWED_INCLUDES)
             ->allowedFilters(...ProductCategoryResource::ALLOWED_FILTERS);

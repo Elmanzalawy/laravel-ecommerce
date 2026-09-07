@@ -6,6 +6,9 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\JsonApi\JsonApiResource;
 
+/**
+ * @mixin Product
+ */
 class ProductResource extends JsonApiResource
 {
     public const ALLOWED_FIELDS = [
@@ -41,9 +44,6 @@ class ProductResource extends JsonApiResource
      */
     public function toAttributes(Request $request): array
     {
-        /**
-         * @var Product $this
-         */
         return [
             'name' => $this->name,
             'slug' => $this->slug,
@@ -64,8 +64,8 @@ class ProductResource extends JsonApiResource
     public function toRelationships(Request $request): array
     {
         return [
-            'categories' => fn() => ProductCategoryResource::collection(
-                $this->categories->where('is_active', true),
+            'categories' => fn () => ProductCategoryResource::collection(
+                $this->categories()->where('is_active', true)->get(),
             ),
         ];
     }

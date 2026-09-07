@@ -1,11 +1,13 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Models\Product;
 use App\Http\Resources\V1\ProductResource;
+use App\Models\Product;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -13,7 +15,8 @@ class ProductService
 {
     /**
      * List products
-     * @return LengthAwarePaginator<int, Product>
+     *
+     * @return LengthAwarePaginator<int, Model>
      */
     public function listProducts(): LengthAwarePaginator
     {
@@ -23,11 +26,10 @@ class ProductService
 
     /**
      * Get product by ID
-     * @param string $id
+     *
      * @throws ModelNotFoundException
-     * @return Product
      */
-    public function getProductById(string $id): Product
+    public function getProductById(string $id): Model
     {
         return $this->productQuery()
             ->findOrFail($id);
@@ -35,7 +37,7 @@ class ProductService
 
     private function productQuery(): QueryBuilder
     {
-        return QueryBuilder::for(Product::query())
+        return QueryBuilder::for(Product::class)
             ->allowedFields(...ProductResource::ALLOWED_FIELDS)
             ->allowedIncludes(...ProductResource::ALLOWED_INCLUDES)
             ->allowedFilters(...ProductResource::ALLOWED_FILTERS);

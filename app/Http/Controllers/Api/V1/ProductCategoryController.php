@@ -9,14 +9,12 @@ use App\Http\Resources\V1\ProductCategoryResource;
 use App\Services\ProductCategoryService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\JsonApi\AnonymousResourceCollection;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ProductCategoryController extends Controller
 {
     /**
      * List product categories
-     * @param ProductCategoryService $productCategoryService
-     * @return AnonymousResourceCollection
      */
     public function index(ProductCategoryService $productCategoryService): AnonymousResourceCollection
     {
@@ -25,8 +23,7 @@ class ProductCategoryController extends Controller
 
     /**
      * Get product category by ID
-     * @param ProductCategoryService $productCategoryService
-     * @param string $id
+     *
      * @return ProductCategoryResource
      */
     public function show(ProductCategoryService $productCategoryService, string $id): ProductCategoryResource|JsonResponse

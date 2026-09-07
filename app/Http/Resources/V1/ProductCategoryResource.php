@@ -2,9 +2,13 @@
 
 namespace App\Http\Resources\V1;
 
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\JsonApi\JsonApiResource;
 
+/**
+ * @mixin ProductCategory
+ */
 class ProductCategoryResource extends JsonApiResource
 {
     public const ALLOWED_FIELDS = [
@@ -53,8 +57,8 @@ class ProductCategoryResource extends JsonApiResource
     public function toRelationships(Request $request): array
     {
         return [
-            'parent' => fn() => ProductCategoryResource::make($this->parent),
-            'children' => fn() => ProductCategoryResource::collection(
+            'parent' => fn () => ProductCategoryResource::make($this->parent),
+            'children' => fn () => ProductCategoryResource::collection(
                 $this->children->where('is_active', true),
             ),
         ];

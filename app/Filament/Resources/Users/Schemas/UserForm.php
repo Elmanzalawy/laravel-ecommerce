@@ -19,7 +19,6 @@ class UserForm
                     ->label('Email address')
                     ->unique(ignoreRecord: true)
                     ->email()
-                    ->email()
                     ->required(),
                 TextInput::make('password')
                     ->password()
@@ -28,7 +27,7 @@ class UserForm
                     ->multiple()
                     ->relationship('roles', 'name')
                     ->preload(),
-                Toggle::make('enabled')->default(true),
+                Toggle::make('is_active')->default(true),
             ]);
     }
 }

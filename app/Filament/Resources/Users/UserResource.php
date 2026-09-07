@@ -26,6 +26,11 @@ class UserResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __(NAVGROUP_USER_DIRECTORY);
+    }
+
     public static function form(Schema $schema): Schema
     {
         return UserForm::configure($schema);

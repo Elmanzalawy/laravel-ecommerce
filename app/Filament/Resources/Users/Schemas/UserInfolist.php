@@ -19,8 +19,12 @@ class UserInfolist
                 TextEntry::make('email_verified_at')
                     ->dateTime()
                     ->placeholder('-'),
-                IconEntry::make('enabled')
+                IconEntry::make('is_active')
                     ->boolean(),
+                TextEntry::make('roles.name')
+                    ->label(__('filament-shield::filament-shield.column.roles'))
+                    ->badge()
+                    ->placeholder('-'),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),

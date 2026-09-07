@@ -20,14 +20,14 @@ return [
     */
 
     'shield_resource' => [
-        'slug' => 'shield/roles',
+        'slug' => 'roles',
         'show_model_path' => true,
         'cluster' => null,
         'tabs' => [
             'pages' => true,
             'widgets' => true,
             'resources' => true,
-            'custom_permissions' => false,
+            'custom_permissions' => true,
         ],
     ],
 
@@ -252,7 +252,9 @@ return [
     |
     */
 
-    'custom_permissions' => [],
+    'custom_permissions' => [
+        'custom:permission:example',
+    ],
 
     /*
     |--------------------------------------------------------------------------

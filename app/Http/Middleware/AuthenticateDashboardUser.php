@@ -18,9 +18,6 @@ class AuthenticateDashboardUser extends Authenticate
 
         if (! $guard->check()) {
             $this->unauthenticated($request, $guards);
-
-            return;
-            /** @phpstan-ignore-line */
         }
 
         $this->auth->shouldUse(Filament::getAuthGuard());
@@ -35,7 +32,7 @@ class AuthenticateDashboardUser extends Authenticate
         // implement `FilamentUser` with `canAccessPanel()`.
 
         $userCanAccessPanel = $user instanceof FilamentUser ? $user->canAccessPanel($panel) : (config('app.env') !== 'local');
-        $userIsEnabled = $user->enabled ?? false;
+        $userIsEnabled = $user->is_active ?? false;
 
         abort_if(! $userCanAccessPanel || ! $userIsEnabled, 403);
     }

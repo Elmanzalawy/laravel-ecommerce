@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
+    // use WithoutModelEvents;
 
     /**
      * Seed the application's database.
@@ -18,11 +18,16 @@ class DatabaseSeeder extends Seeder
     {
         $admin = User::factory()->create([
             'name' => 'Admin',
-            'email' => 'admin@bytesoftware.com',
+            'email' => 'admin@bytesoftware.io',
         ]);
 
         Artisan::call('shield:generate --all --panel=admin --option=policies_and_permissions');
 
         $admin->assignRole('super_admin');
+
+        $this->call([
+            ProductCategorySeeder::class,
+            ProductSeeder::class,
+        ]);
     }
 }

@@ -21,6 +21,15 @@ class ProductCategoryResource extends JsonApiResource
         'children',
     ];
 
+    public const ALLOWED_FILTERS = [
+        'name',
+        'slug',
+        'parent_id',
+        'is_active',
+        'created_at',
+        'updated_at',
+    ];
+
     /**
      * Get the resource's attributes.
      *

@@ -22,6 +22,7 @@
         "spatie/laravel-translatable": "^6.14"
     },
     "require-dev": {
+        "albertoarena/laravel-truss": "^1.11",
         "barryvdh/laravel-debugbar": "^4.4",
         "barryvdh/laravel-ide-helper": "^3.7",
         "fakerphp/faker": "^1.23",
@@ -87,7 +88,7 @@
             "@php artisan config:clear --ansi @no_additional_args",
             "@php artisan test"
         ],
-        "ide-helper": [
+        "ide": [
             "@php artisan ide-helper:models -RW",
             "@php artisan ide-helper:generate",
             "@php artisan erd:generate",
